@@ -36,27 +36,30 @@ public class WordDistanceFinder{
 		return 0;
 	}
 
+	private void log(String msg){
+		System.out.println( msg );
+	}
+
 	public int findMinGapRecur( int key, int low, int high, List<Integer> list){
 		// base case
-		if( high - low == 0){
+		if( low >= high){
 			return 0;
 		}
-		else if( list.size() == 1){
-			return Math.abs( key - list.get(0));
-		}
-		else if ( list.size() == 2){
-			return Math.min( key - list.get(0), key - list.get(1));
+		else if( high - low == 1){
+			return Math.min( Math.abs(key - list.get(high)), Math.abs(key - list.get(low)));
 		}
 		// recursive step
 		else{
-			int middle = list.size() / 2;
-			System.out.println("Middle is: " + middle);
+			int middle = (high + low) / 2;
+			log("High: " + high + " low: " + low +  " middle: " + middle);
 			// the key is less than middle of list
 			if( key < list.get(middle)){
+				log("Key: " + key + " is less than: " + list.get(middle));
 				return findMinGapRecur(key, low, middle, list);
 			}
 			// the key is more than the middle of list
 			else{
+				log("Key: " + key + " is more than: " + list.get(middle));
 				return findMinGapRecur(key, middle+1, high, list);	
 			}		
 		}
@@ -94,8 +97,8 @@ public class WordDistanceFinder{
 		WordDistanceFinder finder = new WordDistanceFinder(testList);
 		//finder.printWordMap();
 		//System.out.println(finder.distance("the","fox"));
-		List<Integer> testList2 = Arrays.asList(1,4,7,11);
-		int closest = finder.findMinGapRecur(10,0,testList2.size(),testList2);
+		List<Integer> testList2 = Arrays.asList(1,2,3,100,200,300);
+		int closest = finder.findMinGapRecur(150,0,testList2.size()-1,testList2);
 		System.out.println(closest);
 	}
 }
