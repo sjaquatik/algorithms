@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.Math;
+import java.util.Iterator;
 public class WordDistanceFinder{
 
 	// Map of String to index position of the word in the list
@@ -16,6 +17,7 @@ public class WordDistanceFinder{
 	
 		// simple case 
 		if( !wordMap.containsKey(str1) || !wordMap.containsKey(str2)){
+			log("Simple case");
 			return 0;
 		}
 	
@@ -29,11 +31,23 @@ public class WordDistanceFinder{
 			List<Integer> firstList = wordMap.get(str1);
 			// get second list
 			List<Integer> secondList = wordMap.get(str2);
-
-		
+			log("First list: " + firstList.toString());
+			Iterator<Integer> lstIt = firstList.iterator();
+			Integer k = lstIt.next();
+			Integer runningMin = findMinGapRecur(k, 0, secondList.size() - 1, secondList);
+			log("The closest distance to: " + k + " to the list: " + secondList.toString() + " is: " + runningMin);
+			Integer tmpMin = runningMin;
+			while(lstIt.hasNext()){
+				k = lstIt.next();
+				tmpMin = findMinGapRecur(k, 0, secondList.size() - 1, secondList);
+				if ( runningMin > tmpMin )
+				{	
+					runningMin = tmpMin;
+				}
+			}
+		return runningMin;
 		}
 	
-		return 0;
 	}
 
 	private void log(String msg){
@@ -42,7 +56,10 @@ public class WordDistanceFinder{
 
 	public int findMinGapRecur( int key, int low, int high, List<Integer> list){
 		// base case
-		if( low >= high){
+		if(list.size() == 1){
+			return Math.abs( list.get(0) - key);
+		}
+		else if( low >= high){
 			return 0;
 		}
 		else if( high - low == 1){
@@ -95,10 +112,8 @@ public class WordDistanceFinder{
 	public static void main(String[] argvs){
 		List<String> testList = Arrays.asList("the","quick","brown","fox","quick");
 		WordDistanceFinder finder = new WordDistanceFinder(testList);
-		//finder.printWordMap();
-		//System.out.println(finder.distance("the","fox"));
-		List<Integer> testList2 = Arrays.asList(1,2,3,100,200,300);
-		int closest = finder.findMinGapRecur(150,0,testList2.size()-1,testList2);
+		finder.printWordMap();
+		int closest = finder.distance("quick", "fox");	
 		System.out.println(closest);
 	}
 }
