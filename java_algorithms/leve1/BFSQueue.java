@@ -1,9 +1,34 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 public class BFSQueue {
 
 	static class Tree{
+		
+		        public void printTree(Node n) {
+    List<Node> currentLevel = new LinkedList();
+    currentLevel.add(n);
+    List<Node> nextLevel = new LinkedList();
+
+    while(!currentLevel.isEmpty()) {
+        Node c = currentLevel.remove(0);
+        System.out.print(c.getData() + " ");
+
+        if(c.left != null)
+            nextLevel.add(c.left);
+        if(c.right != null)
+            nextLevel.add(c.right);
+
+        if(currentLevel.isEmpty()) {
+            System.out.println("");
+            currentLevel.addAll(nextLevel);
+            nextLevel.clear();
+        }
+    }
+} // End Navid method
+		
 		Node root;
+		public Node getRoot(){ return this.root; }
 		public Tree(Node r){
 			this.root = r;
 		}
@@ -72,7 +97,7 @@ public class BFSQueue {
 		public Node getLeft(){ return this.left; }
 		public Node getRight(){ return this.right; }
 	} // end of Node class
-
+	
 	public static void main(String[] args){	
 		
 		Node nine = new Node(9,null,null);
@@ -85,7 +110,8 @@ public class BFSQueue {
 		Node five = new Node(5,null,seven);
 		Node one = new Node(1, three, five);
 		Tree tree = new Tree(one);
-		tree.printTree();
+		tree.printTree(tree.getRoot());
+		//tree.printTree();
 
 	}
 

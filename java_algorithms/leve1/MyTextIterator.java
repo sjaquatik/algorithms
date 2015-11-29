@@ -61,7 +61,11 @@ class MyIterator implements Iterator<String>{
 				buffReader.mark(1);
 				int nextChar = buffReader.read();
 				buffReader.reset();
-				return nextChar != -1;
+				if( nextChar == -1){
+					this.close();
+					return false;
+				}
+				return true;
 			}catch(Exception e){
 				log(e.getMessage());
 				this.close();
