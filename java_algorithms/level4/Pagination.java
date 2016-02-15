@@ -5,7 +5,7 @@ import java.util.List;
 public class Pagination{
 	public static void main(String[] args){
 		String str = "The Wat is a royal temple categorized as Class III, which was built at the beginning of the Ayutthaya period, and was originally called Wat Rai Phrik (meaning in Thai language:\"Vegetable\"). It was so named as its location was within a vegetable garden.[1] The land where the temple is situated was provided by King Rama I to accommodate the prisoners of war.[3] The King Rama VI Vajiravudh got it refurbished by Chao Inthawong, where after it has been known as Wat Intharavihan.[1] Chao Inthwong also brought a priest from Vientianne to preside as the abbot of the temple. The temple then was given a new name as Chai Inthawong";
-			List<String> result = Paginate(str, 38);
+			List<String> result = Paginate(str, 100);
 			for(String s: result){
 				log(s);
 			}

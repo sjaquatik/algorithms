@@ -23,7 +23,7 @@ public class MaxProduct{
 	}
 	
 	public static void main(String[] args){
-		List<Integer> list = Arrays.asList(-1, -2, -3, 5);
+		List<Integer> list = Arrays.asList(-3,1000,0,0,-1);
 		//List<Integer> list = Arrays.asList(6, -3, -10, 0, 2);
 		//List<Integer> list = Arrays.asList(-1, -3, -10, 0, 60);
 		//List<Integer> list = Arrays.asList(-2, -3, 0, -2, -40);
